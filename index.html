@@ -1,55 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
 <title>Bharat 24 Taas Citizen Reporter</title>
 
 <style>
 
 body{
-font-family:Arial,sans-serif;
-background:#f4f4f4;
+font-family:Arial;
+background:#f2f2f2;
 margin:0;
 padding:0;
 }
 
 .header{
 background:#d40000;
-color:white;
-padding:20px;
+color:#fff;
 text-align:center;
+padding:20px;
 }
 
 .container{
-max-width:900px;
-margin:auto;
-background:white;
-padding:25px;
-margin-top:20px;
+max-width:800px;
+background:#fff;
+margin:20px auto;
+padding:20px;
 border-radius:10px;
-box-shadow:0 0 10px rgba(0,0,0,.1);
 }
 
-label{
-display:block;
-margin-top:15px;
-font-weight:bold;
-}
-
-input,
-select,
-textarea{
-
+input,select,textarea{
 width:100%;
 padding:12px;
 margin-top:5px;
+margin-bottom:15px;
 border:1px solid #ccc;
 border-radius:6px;
-
+box-sizing:border-box;
 }
 
 textarea{
@@ -57,42 +45,34 @@ height:150px;
 }
 
 button{
-
+width:100%;
+padding:15px;
 background:#d40000;
 color:white;
-padding:15px;
-width:100%;
 border:none;
-border-radius:6px;
-margin-top:20px;
 font-size:18px;
+border-radius:6px;
 cursor:pointer;
-
 }
 
 button:hover{
-background:#a50000;
+background:#b00000;
 }
 
-.success{
-text-align:center;
-color:green;
-font-weight:bold;
+#msg{
 margin-top:15px;
+font-weight:bold;
+text-align:center;
 }
 
 </style>
-
 </head>
 
 <body>
 
 <div class="header">
-
 <h1>Bharat 24 Taas</h1>
-
 <p>Citizen Reporter Portal</p>
-
 </div>
 
 <div class="container">
@@ -113,59 +93,90 @@ margin-top:15px;
 <select id="category">
 
 <option>Accident</option>
-
 <option>Crime</option>
-
 <option>Politics</option>
-
 <option>Social</option>
-
 <option>Education</option>
-
 <option>Health</option>
-
 <option>Sports</option>
-
 <option>Other</option>
 
 </select>
 
 <label>News Details</label>
-
 <textarea id="details" required></textarea>
 
-<label>Photo / Video Drive Link</label>
+<label>Upload Photo</label>
+<input type="file" id="photo" accept="image/*">
 
-<input type="text" id="media">
+<label>Upload Video</label>
+<input type="file" id="video" accept="video/*">
 
 <button type="submit">
-
 Submit News
-
 </button>
 
 </form>
 
-<div class="success" id="msg"></div>
+<div id="msg"></div>
 
 </div>
 
 <script>
 
 const scriptURL =
-"https://script.google.com/macros/s/AKfycbzyl6QsNi74-qzMu9l6nCRf3A9QO5HwEIhvUT1qMmynggg4ZgV1kGlvmT55QJC8SgfY/exec";
+"PASTE_YOUR_NEW_APPS_SCRIPT_URL_HERE";
 
-document
-.getElementById("newsForm")
-.addEventListener("submit",function(e){
+function fileToBase64(file){
+
+return new Promise((resolve,reject)=>{
+
+const reader = new FileReader();
+
+reader.onload = ()=>{
+
+resolve({
+fileName:file.name,
+mimeType:file.type,
+data:reader.result.split(',')[1]
+});
+
+};
+
+reader.onerror = reject;
+
+reader.readAsDataURL(file);
+
+});
+
+}
+
+document.getElementById("newsForm")
+.addEventListener("submit",async function(e){
 
 e.preventDefault();
 
-fetch(scriptURL,{
+document.getElementById("msg").innerHTML =
+"Uploading... Please Wait";
 
-method:"POST",
+let photoFile = null;
+let videoFile = null;
 
-body:JSON.stringify({
+const photo =
+document.getElementById("photo").files[0];
+
+const video =
+document.getElementById("video").files[0];
+
+if(photo){
+photoFile = await fileToBase64(photo);
+}
+
+if(video){
+videoFile = await fileToBase64(video);
+}
+
+const payload = {
 
 name:
 document.getElementById("name").value,
@@ -179,22 +190,41 @@ document.getElementById("location").value,
 category:
 document.getElementById("category").value,
 
-details:
+newsDetails:
 document.getElementById("details").value,
 
-media:
-document.getElementById("media").value
+photoFile:photoFile,
+
+videoFile:videoFile
+
+};
+
+fetch(scriptURL,{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify(payload)
 
 })
-
-})
-
-.then(res=>{
+.then(r=>r.json())
+.then(data=>{
 
 document.getElementById("msg").innerHTML =
 "News Submitted Successfully";
 
 document.getElementById("newsForm").reset();
+
+})
+.catch(err=>{
+
+document.getElementById("msg").innerHTML =
+"Upload Failed";
+
+console.log(err);
 
 });
 
@@ -203,5 +233,4 @@ document.getElementById("newsForm").reset();
 </script>
 
 </body>
-
 </html>
