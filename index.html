@@ -1,68 +1,184 @@
+```html
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Bharat 24 Taas Citizen Reporter</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
 <style>
 
-body{
-font-family:Arial;
-background:#f2f2f2;
+*{
 margin:0;
 padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#f5f5f5;
+color:#222;
 }
 
 .header{
-background:#d40000;
-color:#fff;
-text-align:center;
+background:linear-gradient(135deg,#c00000,#ff0000);
 padding:20px;
+text-align:center;
+color:#fff;
+box-shadow:0 2px 10px rgba(0,0,0,.2);
+}
+
+.logo{
+max-width:260px;
+width:100%;
+background:#fff;
+padding:8px;
+border-radius:10px;
+margin-bottom:15px;
+}
+
+.header h1{
+font-size:32px;
+margin-bottom:5px;
+}
+
+.header p{
+font-size:16px;
+opacity:.95;
+}
+
+.breaking{
+background:#000;
+color:#fff;
+padding:12px;
+text-align:center;
+font-weight:bold;
+font-size:15px;
 }
 
 .container{
-max-width:800px;
-background:#fff;
-margin:20px auto;
-padding:20px;
-border-radius:10px;
+max-width:900px;
+margin:25px auto;
+padding:15px;
 }
 
-input,select,textarea{
+.links{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:10px;
+margin-bottom:25px;
+}
+
+.links a{
+text-decoration:none;
+padding:14px;
+background:#fff;
+border-radius:10px;
+text-align:center;
+font-weight:bold;
+color:#d40000;
+box-shadow:0 2px 8px rgba(0,0,0,.1);
+transition:.3s;
+}
+
+.links a:hover{
+transform:translateY(-2px);
+}
+
+.card{
+background:#fff;
+padding:25px;
+border-radius:15px;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+border-top:6px solid #d40000;
+}
+
+.card h2{
+text-align:center;
+margin-bottom:15px;
+color:#d40000;
+}
+
+.notice{
+background:#fff3cd;
+border-left:5px solid #ffc107;
+padding:15px;
+border-radius:6px;
+margin-bottom:20px;
+font-size:14px;
+line-height:1.6;
+}
+
+label{
+display:block;
+margin-top:15px;
+margin-bottom:6px;
+font-weight:bold;
+}
+
+input,
+select,
+textarea{
 width:100%;
 padding:12px;
-margin-top:5px;
-margin-bottom:15px;
 border:1px solid #ccc;
-border-radius:6px;
-box-sizing:border-box;
+border-radius:8px;
+font-size:15px;
 }
 
 textarea{
 height:150px;
+resize:none;
 }
 
 button{
 width:100%;
-padding:15px;
-background:#d40000;
+padding:16px;
+margin-top:20px;
+background:#25D366;
 color:white;
 border:none;
+border-radius:8px;
 font-size:18px;
-border-radius:6px;
+font-weight:bold;
 cursor:pointer;
 }
 
 button:hover{
-background:#b00000;
+background:#1fa855;
 }
 
-#msg{
-margin-top:15px;
-font-weight:bold;
+.footer{
+background:#111;
+color:#fff;
+padding:25px;
 text-align:center;
+margin-top:30px;
+}
+
+.footer a{
+color:#ffd700;
+text-decoration:none;
+}
+
+.footer p{
+margin:8px 0;
+}
+
+@media(max-width:768px){
+
+.header h1{
+font-size:24px;
+}
+
+.logo{
+max-width:180px;
+}
+
 }
 
 </style>
@@ -71,26 +187,76 @@ text-align:center;
 <body>
 
 <div class="header">
+
+<img src="./revised_b24t_logo.png" class="logo" alt="Bharat 24 Taas Logo">
+
 <h1>Bharat 24 Taas</h1>
-<p>Citizen Reporter Portal</p>
+
+<p>Citizen Reporter Network</p>
+
+</div>
+
+<div class="breaking">
+
+📰 तुमच्या परिसरातील बातमी, समस्या, अपघात, सामाजिक उपक्रम किंवा विशेष घटना थेट Bharat 24 Taas पर्यंत पोहोचवा
+
 </div>
 
 <div class="container">
+
+<div class="links">
+
+<a href="https://www.bharat24taas.com" target="_blank">
+🌐 Website
+</a>
+
+<a href="https://www.youtube.com/@Bharat24Taas" target="_blank">
+▶ YouTube
+</a>
+
+<a href="https://www.facebook.com/Bharat24Taas" target="_blank">
+📘 Facebook
+</a>
+
+<a href="https://www.instagram.com/Bharat24Taas" target="_blank">
+📷 Instagram
+</a>
+
+<a href="https://x.com/Bharat24Taas" target="_blank">
+𝕏 X (Twitter)
+</a>
+
+</div>
+
+<div class="card">
+
+<h2>Citizen Reporter Form</h2>
+
+<div class="notice">
+
+<b>महत्त्वाची सूचना:</b><br><br>
+
+फॉर्म भरल्यानंतर WhatsApp उघडेल.<br>
+कृपया त्यानंतर संबंधित फोटो किंवा व्हिडिओ attach करून Send करा.
+
+</div>
 
 <form id="newsForm">
 
 <label>Name</label>
 <input type="text" id="name" required>
 
-<label>Mobile</label>
-<input type="text" id="mobile" required>
+<label>Mobile Number</label>
+<input type="tel" id="mobile" required>
 
 <label>Location</label>
 <input type="text" id="location" required>
 
 <label>Category</label>
 
-<select id="category">
+<select id="category" required>
+
+<option value="">Select Category</option>
 
 <option>Accident</option>
 <option>Crime</option>
@@ -104,129 +270,106 @@ text-align:center;
 </select>
 
 <label>News Details</label>
+
 <textarea id="details" required></textarea>
 
-<label>Upload Photo</label>
-<input type="file" id="photo" accept="image/*">
-
-<label>Upload Video</label>
-<input type="file" id="video" accept="video/*">
-
 <button type="submit">
-Submit News
+
+📤 Submit & Open WhatsApp
+
 </button>
 
 </form>
 
-<div id="msg"></div>
+</div>
+
+</div>
+
+<div class="footer">
+
+<h3>Bharat 24 Taas News Network</h3>
+
+<p>
+🌐
+<a href="https://www.bharat24taas.com" target="_blank">
+www.bharat24taas.com
+</a>
+</p>
+
+<p>
+▶
+<a href="https://www.youtube.com/@Bharat24Taas" target="_blank">
+YouTube @Bharat24Taas
+</a>
+</p>
+
+<p>
+📘 Facebook |
+📷 Instagram |
+𝕏 X
+</p>
+
+<p>
+@Bharat24Taas
+</p>
+
+<p>
+© 2026 Bharat 24 Taas. All Rights Reserved.
+</p>
 
 </div>
 
 <script>
 
-const scriptURL =
-"PASTE_YOUR_NEW_APPS_SCRIPT_URL_HERE";
-
-function fileToBase64(file){
-
-return new Promise((resolve,reject)=>{
-
-const reader = new FileReader();
-
-reader.onload = ()=>{
-
-resolve({
-fileName:file.name,
-mimeType:file.type,
-data:reader.result.split(',')[1]
-});
-
-};
-
-reader.onerror = reject;
-
-reader.readAsDataURL(file);
-
-});
-
-}
-
 document.getElementById("newsForm")
-.addEventListener("submit",async function(e){
+.addEventListener("submit",function(e){
 
 e.preventDefault();
 
-document.getElementById("msg").innerHTML =
-"Uploading... Please Wait";
+const name =
+document.getElementById("name").value;
 
-let photoFile = null;
-let videoFile = null;
+const mobile =
+document.getElementById("mobile").value;
 
-const photo =
-document.getElementById("photo").files[0];
+const location =
+document.getElementById("location").value;
 
-const video =
-document.getElementById("video").files[0];
+const category =
+document.getElementById("category").value;
 
-if(photo){
-photoFile = await fileToBase64(photo);
-}
+const details =
+document.getElementById("details").value;
 
-if(video){
-videoFile = await fileToBase64(video);
-}
+const date =
+new Date().toLocaleString("en-IN");
 
-const payload = {
+const message =
+encodeURIComponent(
 
-name:
-document.getElementById("name").value,
+`📰 BHARAT 24 TAAS CITIZEN REPORTER
 
-mobile:
-document.getElementById("mobile").value,
+Date: ${date}
 
-location:
-document.getElementById("location").value,
+Name: ${name}
 
-category:
-document.getElementById("category").value,
+Mobile: ${mobile}
 
-newsDetails:
-document.getElementById("details").value,
+Location: ${location}
 
-photoFile:photoFile,
+Category: ${category}
 
-videoFile:videoFile
+News Details:
+${details}
 
-};
+मी संबंधित फोटो / व्हिडिओ खाली पाठवत आहे.`
 
-fetch(scriptURL,{
+);
 
-method:"POST",
-
-headers:{
-"Content-Type":"application/json"
-},
-
-body:JSON.stringify(payload)
-
-})
-.then(r=>r.json())
-.then(data=>{
-
-document.getElementById("msg").innerHTML =
-"News Submitted Successfully";
-
-document.getElementById("newsForm").reset();
-
-})
-.catch(err=>{
-
-document.getElementById("msg").innerHTML =
-"Upload Failed";
-
-console.log(err);
-
-});
+window.open(
+`https://wa.me/919029909904?text=${message}`,
+'_blank'
+);
 
 });
 
@@ -234,3 +377,4 @@ console.log(err);
 
 </body>
 </html>
+```
