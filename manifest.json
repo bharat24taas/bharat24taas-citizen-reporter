@@ -1,0 +1,16 @@
+{
+  "name": "Bharat 24 Taas Citizen Reporter",
+  "short_name": "Citizen Reporter",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#b30000",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "citizenreporter.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
