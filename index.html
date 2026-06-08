@@ -34,6 +34,11 @@ button{width:100%;padding:15px;background:#25D366;color:#fff;border:none;border-
 .footer{background:#111;color:#fff;text-align:center;padding:20px;margin-top:20px}
 .footer a{color:#ffd700;text-decoration:none}
 </style>
+  <link rel="manifest" href="manifest.json">
+
+<meta name="theme-color" content="#b30000">
+
+<link rel="apple-touch-icon" href="citizenreporter.png">
 </head>
 <body>
 
@@ -90,7 +95,15 @@ button{width:100%;padding:15px;background:#25D366;color:#fff;border:none;border-
 </form>
 </div>
 </div>
+<button id="installBtn"
+style="display:none;width:90%;max-width:500px;margin:20px auto;padding:15px;background:#b30000;color:#fff;border:none;border-radius:8px;font-size:18px;font-weight:bold;cursor:pointer;">
+📲 Citizen Reporter App Install करा
+</button>
 
+<div class="footer">
+<p><a href="https://www.bharat24taas.com" target="_blank">www.bharat24taas.com</a></p>
+<p>@Bharat24Taas</p>
+</div>
 <div class="footer">
 <p><a href="https://www.bharat24taas.com" target="_blank">www.bharat24taas.com</a></p>
 <p>@Bharat24Taas</p>
@@ -177,6 +190,32 @@ console.log(err);
 }
 });
 </script>
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/service-worker.js');
+}
+</script>
+  <script>
+let deferredPrompt;
 
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+
+  deferredPrompt = e;
+
+  const installBtn = document.getElementById('installBtn');
+
+  installBtn.style.display = 'block';
+
+  installBtn.addEventListener('click', async () => {
+
+    deferredPrompt.prompt();
+
+    const { outcome } = await deferredPrompt.userChoice;
+
+    deferredPrompt = null;
+  });
+});
+</script>
 </body>
 </html>
